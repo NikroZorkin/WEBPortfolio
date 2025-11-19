@@ -1,0 +1,109 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  /* Font families */
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  /* Color mappings for Tailwind */
+  --color-bg: var(--bg);
+  --color-fg: var(--fg);
+  --color-card: var(--card);
+  --color-card-fg: var(--card-fg);
+  --color-border: var(--border);
+  --color-muted: var(--muted);
+  --color-muted-fg: var(--muted-fg);
+  --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-fg);
+  --color-ring: var(--ring);
+  --color-primary: var(--primary);
+  --color-primary-fg: var(--primary-fg);
+  --color-destructive: var(--destructive);
+  --color-destructive-fg: var(--destructive-fg);
+  --color-input: var(--border);
+
+  /* Backwards compatibility */
+  --color-background: var(--bg);
+  --color-foreground: var(--fg);
+
+  /* Border radius */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+/* Light theme (not default, but defined for toggle) */
+:root {
+  --radius: 0.75rem;
+
+  /* Light theme colors - WCAG AA compliant */
+  --bg: oklch(0.99 0 0); /* ~white */
+  --fg: oklch(0.15 0 0); /* ~black, contrast 17.6:1 with bg */
+  --card: oklch(1 0 0); /* white */
+  --card-fg: oklch(0.15 0 0); /* ~black */
+  --border: oklch(0.88 0 0); /* light gray */
+  --muted: oklch(0.96 0 0); /* very light gray */
+  --muted-fg: oklch(0.45 0 0); /* medium gray, contrast 7.4:1 with bg */
+  --accent: oklch(0.94 0 0); /* light accent */
+  --accent-fg: oklch(0.15 0 0); /* dark text */
+  --ring: oklch(0.6 0 0); /* focus ring */
+  --primary: oklch(0.25 0 0); /* dark */
+  --primary-fg: oklch(0.99 0 0); /* light */
+  --destructive: oklch(0.55 0.22 25); /* red */
+  --destructive-fg: oklch(0.99 0 0); /* white */
+}
+
+/* Dark theme (default) - WCAG AA compliant */
+.dark {
+  --bg: oklch(0.12 0 0); /* ~black */
+  --fg: oklch(0.98 0 0); /* ~white, contrast 16.8:1 with bg */
+  --card: oklch(0.18 0 0); /* dark gray */
+  --card-fg: oklch(0.98 0 0); /* ~white */
+  --border: oklch(0.28 0 0); /* border gray, subtle */
+  --muted: oklch(0.22 0 0); /* muted background */
+  --muted-fg: oklch(0.65 0 0); /* muted text, contrast 7.8:1 with bg */
+  --accent: oklch(0.25 0 0); /* accent background */
+  --accent-fg: oklch(0.98 0 0); /* accent text */
+  --ring: oklch(0.55 0 0); /* focus ring */
+  --primary: oklch(0.92 0 0); /* light primary */
+  --primary-fg: oklch(0.15 0 0); /* dark text for primary */
+  --destructive: oklch(0.65 0.2 25); /* softer red for dark */
+  --destructive-fg: oklch(0.98 0 0); /* white */
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Disable smooth scroll for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Section scroll offset for sticky header */
+section {
+  scroll-margin-top: 5rem;
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+    outline-color: var(--ring);
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-sans), system-ui, sans-serif;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}

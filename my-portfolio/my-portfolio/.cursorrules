@@ -1,0 +1,146 @@
+Назначение: глобальные правила для Cursor. Не менять без явного запроса.
+
+0) Scope & Goals
+
+Одностраничный англоязычный портфолио-лендинг (якоря: #hero, #work, #about, #experience, #skills, #testimonials?, #contact).
+
+Темы: dark по умолчанию, есть light.
+
+CTA: Email + Telegram.
+
+Работ: 3–5 без фильтров.
+
+Вторая фаза (страницы кейсов) — после MVP.
+
+1) Stack
+
+Next.js 16 (App Router), TypeScript.
+
+Tailwind CSS v4 + shadcn/ui.
+
+Framer Motion (только transform/opacity).
+
+next-themes, next/image, Contentlayer/MDX (заглушки).
+
+Аналитика: Plausible или GA4 (заглушка на MVP).
+
+2) Архитектура и структура
+
+Server Components по умолчанию. use client — только где нужен интерактив/анимации/форма.
+
+Папки:
+
+app/ — страницы/лейауты (лендинг).
+
+components/ и components/ui/ — переиспользуемые компоненты.
+
+lib/ — утилиты (валидация, конфиги).
+
+content/ — MDX c заглушками проектов.
+
+public/images/ — медиа.
+
+styles/ — глобальные стили/токены тем.
+
+Малые диффы. Меняй только файлы, указанные в задаче.
+
+3) Code Style
+
+Везде TypeScript. any запрещён; unknown — только со сужением.
+
+Функциональные компоненты, стрелочные функции.
+
+Форматирование = Prettier. Не навязывать кавычки/точки с запятой вручную. Если нужен особый стиль — сперва настрой Prettier, потом обнови это правило.
+
+Tailwind только утилитами (без inline-styles).
+
+Именование: Components — PascalCase; non-components — kebab-case; функции — camelCase.
+
+4) Темизация и контраст
+
+Темы через CSS-переменные и next-themes.
+
+Контраст не ниже WCAG AA в обеих темах.
+
+Тёмная тема — default, выбор сохраняется.
+
+5) Анимации (жёсткая дисциплина)
+
+Разрешены ровно 6 паттернов:
+
+Page-fade при первой загрузке.
+
+Fade/slide-in секций при входе в вьюпорт (once).
+
+Stagger для сеток (work/skills).
+
+Hover-lift/scale карточек (scale ≤ 1.04, translateY ≤ 4px).
+
+Magnetic-hover только на 2–3 CTA (Email, View, Submit). На touch — off.
+
+Лёгкий parallax портрета в Hero (desktop), отключить на touch/мобиле.
+
+Отключения: prefers-reduced-motion: reduce — оставить только простые fade, без параллакса/стаггера.
+Запрещено: scroll-jacking/lenis/locomotive; глобальные курсоры и cursor-trails; видео-фоны; тяжёлые SVG-фильтры; анимация layout-свойств.
+
+6) Производительность (ворота на PR)
+
+LCP ≤ 1.8s, INP < 150ms, CLS < 0.03 (мобайл/4G эмуляция).
+
+Шрифты: максимум 1 вариативный + 1 вспомогательный. Локально, предзагрузка, display=swap.
+
+Изображения: next/image, AVIF/WebP, cover ≤ 180–240KB, корректные sizes.
+
+Backdrop-blur ≤ md и только на header после скролла.
+
+Любой новый пакет >10KB — обоснование в описании PR.
+
+7) Доступность
+
+Полная клавиатурная навигация, видимый focus.
+
+Для интерактивных — корректные aria-* и подписи.
+
+Hover-состояния имеют нецветовые индикаторы.
+
+Все изображения с осмысленным alt.
+
+8) SEO / OG / Analytics
+
+Title/Description под “Freelance UX/UI Designer Portfolio”.
+
+JSON-LD: Person (главная) + ItemList (3–5 проектов).
+
+Canonical: /.
+
+OG/Twitter: статический шаблон 1200×630 (тёмная тема).
+
+События аналитики: cta_click, project_open, social_click, form_submit, theme_toggle.
+
+9) Контакты и лиды
+
+Форма: Name, Email, Message (обяз.), Budget (optional).
+
+Отправка: email (Resend/SMTP) + Telegram-бот (заглушка на MVP).
+
+Антиспам: honeypot + небольшая задержка отправки.
+
+Состояния: loading/success/error с аккуратной микро-анимацией.
+
+10) Проверки качества
+
+eslint --fix без ошибок.
+
+Lighthouse mobile ≥ 90.
+
+Нет ошибок в консоли.
+
+Список изменённых файлов и почему менялись.
+
+11) Процесс в Cursor
+
+Перед изменениями: план 3–5 шагов и список файлов.
+
+После: перечисли файлы и причины, укажи, какие пункты DoD/метрики затронуты.
+
+Один таск → малый дифф → проверка метрик → мерж.

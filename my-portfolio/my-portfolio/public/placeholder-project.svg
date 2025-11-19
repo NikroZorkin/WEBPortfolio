@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900">
+  <rect width="1200" height="900" fill="#2a2a2a"/>
+  <rect x="100" y="100" width="1000" height="600" fill="#333" stroke="#555" stroke-width="4" rx="12"/>
+  <rect x="150" y="150" width="450" height="300" fill="#444" stroke="#666" stroke-width="3" rx="8"/>
+  <rect x="650" y="150" width="450" height="300" fill="#444" stroke="#666" stroke-width="3" rx="8"/>
+  <rect x="150" y="500" width="900" height="150" fill="#444" stroke="#666" stroke-width="3" rx="8"/>
+  <text x="600" y="780" font-family="sans-serif" font-size="48" fill="#666" text-anchor="middle" font-weight="bold">Project Placeholder</text>
+</svg>
+
