@@ -72,63 +72,42 @@ export function HeroSection() {
         className="relative min-h-screen px-4 py-24 md:px-8 lg:py-32"
       >
         <div className="mx-auto max-w-7xl">
-          {/* Bento Grid: 12 columns on desktop, single column on mobile */}
+          {/* Bento Grid: 12 columns on desktop, single column on mobile - matching reference layout */}
           <div className="grid grid-cols-1 gap-4 auto-rows-[160px] lg:grid-cols-12">
-            {/* 1) Name: colSpan=6, rowSpan=2 (left top) - smaller card as per reference */}
+            {/* 1) Name: colSpan=4, rowSpan=2 (left top, smaller width) */}
             <BentoCard
-              colSpan={{ default: 12, lg: 6 }}
+              colSpan={{ default: 12, lg: 4 }}
               rowSpan={{ default: 2, lg: 2 }}
-              className="flex flex-col justify-center lg:col-start-1 lg:row-start-1 lg:min-h-[336px] lg:max-h-[336px]"
+              className="flex flex-col justify-end lg:col-start-1 lg:row-start-1 lg:min-h-[336px] lg:max-h-[336px]"
             >
-              <h1 className="text-5xl font-black uppercase tracking-tight leading-[0.9] text-fg sm:text-balance md:text-7xl lg:leading-[0.85] lg:text-[clamp(32px,6vw,96px)]">
+              <h1 className="text-4xl font-black uppercase tracking-tight leading-[0.95] text-fg sm:text-balance md:text-5xl lg:leading-[0.9] lg:text-[clamp(28px,5vw,72px)]">
                 DANYLO
                 <br />
                 ZORKIN
               </h1>
             </BentoCard>
 
-            {/* 2) Portrait: colSpan=3, rowSpan=3 (to the right of name) */}
+            {/* 2) Portrait: colSpan=3, rowSpan=3 (middle column) - Portrait photo */}
             <BentoCard
               colSpan={{ default: 12, lg: 3 }}
               rowSpan={{ default: 3, lg: 3 }}
               noPadding
-              className="relative lg:col-start-7 lg:row-start-1 lg:min-h-[512px] lg:max-h-[512px]"
+              className="relative overflow-hidden lg:col-start-5 lg:row-start-1 lg:min-h-[512px] lg:max-h-[512px]"
             >
-              <ParallaxImage strength={10} className="h-full w-full">
-                <div className="relative h-full w-full">
-                  <Image
-                    src="/placeholder-portrait.svg"
-                    alt="Jane Doe - UX/UI Designer"
-                    fill
-                    priority
-                    sizes="(max-width: 1024px) 100vw, 25vw"
-                    className="object-cover"
-                  />
-                  {/* Placeholder SVG pattern */}
-                  <div className="absolute inset-0 flex items-center justify-center bg-muted">
-                    <svg
-                      className="h-24 w-24 text-muted-fg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={1.5}
-                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                      />
-                    </svg>
-                  </div>
-                </div>
-              </ParallaxImage>
+              <div className="absolute inset-0 bg-gray-100">
+                <img
+                  src="/portrait.jpg"
+                  alt="Danylo Zorkin"
+                  className="h-full w-full object-cover object-center"
+                />
+              </div>
             </BentoCard>
 
-            {/* 3) Experience: colSpan=3, rowSpan=5 (rightmost column, tall) */}
+            {/* 3) Experience: colSpan=5, rowSpan=4 (rightmost column, aligned with bio bottom) */}
             <BentoCard
-              colSpan={{ default: 12, lg: 3 }}
-              rowSpan={{ default: 5, lg: 5 }}
-              className="flex flex-col lg:col-start-10 lg:row-start-1 lg:min-h-[864px] lg:max-h-[864px]"
+              colSpan={{ default: 12, lg: 5 }}
+              rowSpan={{ default: 4, lg: 4 }}
+              className="flex flex-col lg:col-start-8 lg:row-start-1 lg:min-h-[688px] lg:max-h-[688px]"
             >
               <h2 className="mb-6 text-2xl font-bold uppercase text-fg md:text-3xl lg:text-4xl">
                 Experience
@@ -153,9 +132,9 @@ export function HeroSection() {
               </div>
             </BentoCard>
 
-            {/* 4) BioShort: colSpan=6, rowSpan=2 (under name, stretched wider, closer to name) */}
+            {/* 4) BioShort: colSpan=4, rowSpan=2 (under name, left column) */}
             <BentoCard
-              colSpan={{ default: 12, lg: 6 }}
+              colSpan={{ default: 12, lg: 4 }}
               rowSpan={{ default: 2, lg: 2 }}
               className="flex flex-col justify-start lg:col-start-1 lg:row-start-3 lg:min-h-[336px] lg:max-h-[336px] pt-4! px-6! pb-8! md:px-8! md:pb-8!"
             >
@@ -168,12 +147,12 @@ export function HeroSection() {
               </p>
             </BentoCard>
 
-            {/* 5) EmailMe: colSpan=3, rowSpan=1 (smaller, aligned with bio bottom) - Smart email with Gmail/mailto fallback */}
+            {/* 5) EmailMe: colSpan=3, rowSpan=1 (under portrait, middle column, aligned with bio bottom) - Smart email with Gmail/mailto fallback */}
             <BentoCard
               colSpan={{ default: 12, lg: 3 }}
               rowSpan={{ default: 1, lg: 1 }}
               noPadding
-              className="group relative lg:col-start-7 lg:row-start-4 lg:min-h-[160px] lg:max-h-[160px] hover:bg-[#1A1A1A] transition-colors duration-300"
+              className="group relative lg:col-start-5 lg:row-start-4 lg:min-h-[160px] lg:max-h-[160px] hover:bg-[#1A1A1A] transition-colors duration-300"
             >
               <a
                 href={mailtoHref}
@@ -181,14 +160,16 @@ export function HeroSection() {
                 aria-label="Write me an email"
                 onClick={handleEmailClick}
               >
-                <div className="absolute left-4 top-3 text-xs text-muted-fg md:left-6 md:top-4 md:text-sm">
-                  Get in touch?
+                <div className="absolute left-3 top-2 text-xs text-muted-fg md:left-4 md:top-3">
+                  Wanna get
+                  <br />
+                  in touch?
                 </div>
-                <ArrowUpRight className="absolute right-4 top-3 h-4 w-4 text-primary transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 md:right-6 md:top-4 md:h-5 md:w-5" />
-                <div className="absolute bottom-4 left-4 md:bottom-6 md:left-6">
+                <ArrowUpRight className="absolute right-3 top-2 h-4 w-4 text-primary transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 md:right-4 md:top-3 md:h-4 md:w-4" />
+                <div className="absolute bottom-3 left-3 md:bottom-4 md:left-4">
                   <MagneticButton strength={8}>
                     <div className="relative">
-                      <span className="text-lg font-bold uppercase text-fg md:text-xl lg:text-2xl">
+                      <span className="text-base font-bold uppercase text-fg md:text-lg lg:text-xl">
                         EMAIL ME
                       </span>
                     </div>

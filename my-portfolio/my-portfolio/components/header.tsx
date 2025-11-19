@@ -50,7 +50,7 @@ export function Header() {
       <header
         className={`fixed left-0 right-0 top-0 z-50 transition-all duration-200 ${
           isScrolled
-            ? 'border-b border-border bg-bg/80 backdrop-blur-md'
+            ? 'border-b border-border bg-bg/95 backdrop-blur-md'
             : 'bg-transparent'
         }`}
         style={{
@@ -64,9 +64,9 @@ export function Header() {
           {/* Logo/Name */}
           <a
             href="#hero"
-            className="text-lg font-semibold text-fg transition-colors hover:text-primary"
+            className="text-lg font-semibold italic text-fg transition-colors hover:text-primary"
           >
-            Portfolio
+            BENTOPORTFOLIO
           </a>
 
           {/* Navigation Links */}

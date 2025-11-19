@@ -87,6 +87,7 @@ export function BentoCard({
     4: 'row-span-4',
     5: 'row-span-5',
     6: 'row-span-6',
+    7: 'row-span-7',
   }
   
   const rowSpanLgMap: Record<number, string> = {
@@ -96,6 +97,7 @@ export function BentoCard({
     4: 'lg:row-span-4',
     5: 'lg:row-span-5',
     6: 'lg:row-span-6',
+    7: 'lg:row-span-7',
   }
   
   // Custom grid spans override size classes

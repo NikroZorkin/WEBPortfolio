@@ -56,22 +56,22 @@
   --destructive-fg: oklch(0.99 0 0); /* white */
 }
 
-/* Dark theme (default) - WCAG AA compliant */
+/* Dark theme (default) - Very dark, near-black palette matching reference */
 .dark {
-  --bg: oklch(0.12 0 0); /* ~black */
-  --fg: oklch(0.98 0 0); /* ~white, contrast 16.8:1 with bg */
-  --card: oklch(0.18 0 0); /* dark gray */
+  --bg: oklch(0.08 0 0); /* Near-black background */
+  --fg: oklch(0.98 0 0); /* ~white, high contrast */
+  --card: oklch(0.10 0 0); /* Very dark gray cards */
   --card-fg: oklch(0.98 0 0); /* ~white */
-  --border: oklch(0.28 0 0); /* border gray, subtle */
-  --muted: oklch(0.22 0 0); /* muted background */
-  --muted-fg: oklch(0.65 0 0); /* muted text, contrast 7.8:1 with bg */
-  --accent: oklch(0.25 0 0); /* accent background */
-  --accent-fg: oklch(0.98 0 0); /* accent text */
-  --ring: oklch(0.55 0 0); /* focus ring */
-  --primary: oklch(0.92 0 0); /* light primary */
-  --primary-fg: oklch(0.15 0 0); /* dark text for primary */
-  --destructive: oklch(0.65 0.2 25); /* softer red for dark */
-  --destructive-fg: oklch(0.98 0 0); /* white */
+  --border: oklch(0.20 0 0); /* Subtle border, barely visible */
+  --muted: oklch(0.14 0 0); /* Muted background */
+  --muted-fg: oklch(0.60 0 0); /* Muted text */
+  --accent: oklch(0.18 0 0); /* Accent background */
+  --accent-fg: oklch(0.98 0 0); /* Accent text */
+  --ring: oklch(0.55 0 0); /* Focus ring */
+  --primary: oklch(0.92 0 0); /* Light primary */
+  --primary-fg: oklch(0.15 0 0); /* Dark text for primary */
+  --destructive: oklch(0.65 0.2 25); /* Softer red for dark */
+  --destructive-fg: oklch(0.98 0 0); /* White */
 }
 
 /* Smooth scroll behavior */
