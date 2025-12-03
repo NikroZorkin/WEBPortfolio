@@ -8,18 +8,20 @@ const projects = [
   {
     id: '1',
     title: 'Redesign + SEO for the Website',
-    description: 'Complete redesign and SEO optimization for Style Leap fashion platform',
+    description: 'A website for selecting a stylist and updating a wardrobe. My tasks included optimizing SEO for the website, as well as a complete redesign and updating with a focus on minimalism and maximum simplicity for the client.',
     cover: '/project-styleleap.jpg',
     tags: ['Figma', 'Adobe Photoshop'],
     featured: true,
+    link: 'https://www.upwork.com/freelancers/~01648f1c04b49f406f?p=1963226663592017920',
   },
   {
     id: '2',
-    title: 'Mobile Banking App',
-    description: 'Intuitive financial management for millennials',
-    cover: '/placeholder-project.svg',
-    tags: ['Mobile', 'Fintech'],
+    title: 'MVP app (Discord-like utility for gamers)',
+    description: 'The screen is where squads vote on what game to play. A modern, minimal style with subtle gamer energy. Deliverable: 1 polished mobile screen (Figma).',
+    cover: '/iPhone 15 Pro.jpg',
+    tags: ['Figma'],
     featured: false,
+    link: 'https://www.upwork.com/freelancers/~01648f1c04b49f406f?p=1963172177032921088',
   },
   {
     id: '3',
@@ -28,6 +30,7 @@ const projects = [
     cover: '/placeholder-project.svg',
     tags: ['Dashboard', 'Healthcare'],
     featured: false,
+    link: null,
   },
   {
     id: '4',
@@ -36,6 +39,7 @@ const projects = [
     cover: '/placeholder-project.svg',
     tags: ['Web', 'Travel'],
     featured: false,
+    link: null,
   },
   {
     id: '5',
@@ -44,6 +48,7 @@ const projects = [
     cover: '/placeholder-project.svg',
     tags: ['Mobile', 'Health'],
     featured: false,
+    link: null,
   },
 ]
 
@@ -64,15 +69,7 @@ export function WorkSection() {
           {/* Bento Grid for Projects with Stagger Animation (C4) */}
           <StaggerList className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 md:gap-6">
             {projects.map((project) => {
-            return (
-              <BentoCard
-                key={project.id}
-                colSpan={{ default: 1, md: 1, lg: 1 }}
-                rowSpan={2}
-                interactive
-                noPadding
-                className="group cursor-pointer overflow-hidden"
-              >
+              const cardContent = (
                 <div className="flex h-full w-full flex-col">
                   {/* Project Cover */}
                   <div className="relative aspect-[16/10] w-full overflow-hidden bg-muted">
@@ -124,8 +121,31 @@ export function WorkSection() {
                     </div>
                   </div>
                 </div>
-              </BentoCard>
-            )
+              )
+
+              return (
+                <BentoCard
+                  key={project.id}
+                  colSpan={{ default: 1, md: 1, lg: 1 }}
+                  rowSpan={2}
+                  interactive
+                  noPadding
+                  className="group cursor-pointer overflow-hidden"
+                >
+                  {project.link ? (
+                    <a 
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block h-full w-full"
+                    >
+                      {cardContent}
+                    </a>
+                  ) : (
+                    cardContent
+                  )}
+                </BentoCard>
+              )
             })}
           </StaggerList>
         </div>
