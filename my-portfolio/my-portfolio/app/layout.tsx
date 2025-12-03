@@ -79,8 +79,8 @@ export default function RootLayout({
           defaultTheme="dark"
           enableSystem={false}
           disableTransitionOnChange={false}
-        >
-          {children}
+      >
+        {children}
         </ThemeProvider>
       </body>
     </html>

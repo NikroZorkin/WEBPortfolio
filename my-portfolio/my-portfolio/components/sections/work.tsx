@@ -25,12 +25,13 @@ const projects = [
   },
   {
     id: '3',
-    title: 'Healthcare Dashboard',
-    description: 'Data visualization for medical professionals',
-    cover: '/placeholder-project.svg',
-    tags: ['Dashboard', 'Healthcare'],
+    title: 'Furniture Website design',
+    description: 'Task: Strict, laconic, minimalistic. Come up with a logo. Decide on typography yourself. Design preferences: More subtle shapes, fewer details, emphasis on images and product descriptions. Main pages - 5 (Home, product issue page, product page, cart, payment page). Additional pages - 4 (page of liked products, search results page, privacy policy, payment and delivery). Also responsive website design for tablet and mobile.',
+    cover: '/chrome_WwoeNinjeQ.jpg',
+    tags: ['Prototype', 'Figma', 'Adobe Photoshop', 'Responsive Design', 'UX & UI', 'UI/UX Prototyping', 'Web Design'],
     featured: false,
-    link: null,
+    link: 'https://www.upwork.com/freelancers/~01648f1c04b49f406f?p=1738985797658210304',
+    imagePosition: 'center 70%',
   },
   {
     id: '4',
@@ -97,6 +98,7 @@ export function WorkSection() {
                         fill
                         sizes="(max-width: 768px) 100vw, 33vw"
                         className="object-cover transition-transform duration-300 group-hover:scale-105"
+                        style={{ objectPosition: project.imagePosition || 'center' }}
                       />
                     )}
                   </div>
