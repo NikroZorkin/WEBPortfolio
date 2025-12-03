@@ -4,7 +4,6 @@ import { WorkSection } from '@/components/sections/work'
 import { AboutSection } from '@/components/sections/about'
 import { ExperienceSection } from '@/components/sections/experience'
 import { SkillsSection } from '@/components/sections/skills'
-import { TestimonialsSection } from '@/components/sections/testimonials'
 import { ContactSection } from '@/components/sections/contact'
 import { PageFade } from '@/components/animations/page-fade'
 
@@ -18,7 +17,6 @@ export default function Home() {
         <AboutSection />
         <ExperienceSection />
         <SkillsSection />
-        <TestimonialsSection />
         <ContactSection />
       </main>
     </PageFade>
