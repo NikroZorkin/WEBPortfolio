@@ -2,16 +2,26 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { useTheme } from 'next-themes'
-import { Moon, Sun } from 'lucide-react'
+import { 
+  Moon, 
+  Sun, 
+  Home, 
+  Briefcase, 
+  User, 
+  Clock, 
+  Wrench, 
+  Mail 
+} from 'lucide-react'
 import { trackEvent, AnalyticsEvents } from '@/lib/analytics'
+import { FloatingDock } from '@/components/ui/floating-dock'
 
 const navItems = [
-  { href: '#hero', label: 'Home' },
-  { href: '#work', label: 'Work' },
-  { href: '#about', label: 'About' },
-  { href: '#experience', label: 'Experience' },
-  { href: '#skills', label: 'Skills' },
-  { href: '#contact', label: 'Contact' },
+  { href: '#hero', title: 'Home', icon: <Home className="h-full w-full text-muted-fg" /> },
+  { href: '#work', title: 'Work', icon: <Briefcase className="h-full w-full text-muted-fg" /> },
+  { href: '#about', title: 'About', icon: <User className="h-full w-full text-muted-fg" /> },
+  { href: '#experience', title: 'Experience', icon: <Clock className="h-full w-full text-muted-fg" /> },
+  { href: '#skills', title: 'Skills', icon: <Wrench className="h-full w-full text-muted-fg" /> },
+  { href: '#contact', title: 'Contact', icon: <Mail className="h-full w-full text-muted-fg" /> },
 ]
 
 export function Header() {
@@ -50,7 +60,7 @@ export function Header() {
       <header
         className={`fixed left-0 right-0 top-0 z-50 transition-all duration-200 ${
           isScrolled
-            ? 'border-b border-border bg-bg/95 backdrop-blur-md'
+            ? 'border-b border-border bg-bg/80 backdrop-blur-md'
             : 'bg-transparent'
         }`}
         style={{
@@ -69,19 +79,12 @@ export function Header() {
             BENTOPORTFOLIO
           </a>
 
-          {/* Navigation Links */}
-          <ul className="hidden items-center gap-1 md:flex">
-            {navItems.map((item) => (
-              <li key={item.href}>
-                <a
-                  href={item.href}
-                  className="rounded-md px-3 py-2 text-sm font-medium text-muted-fg transition-colors hover:bg-muted hover:text-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                >
-                  {item.label}
-                </a>
-              </li>
-            ))}
-          </ul>
+          {/* Floating Dock Navigation */}
+          <FloatingDock 
+            items={navItems}
+            desktopClassName="bg-transparent"
+            mobileClassName="fixed bottom-6 right-6"
+          />
 
           {/* Theme Toggle */}
           <button

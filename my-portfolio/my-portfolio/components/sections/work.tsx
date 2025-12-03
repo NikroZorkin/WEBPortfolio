@@ -50,7 +50,7 @@ const projects = [
 export function WorkSection() {
   return (
     <SectionReveal>
-      <section id="work" className="min-h-screen px-4 py-24 md:px-8">
+      <section id="work" className="min-h-screen px-4 pt-20 pb-24 md:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="mb-12">
             <h2 className="text-3xl font-bold text-fg md:text-5xl">

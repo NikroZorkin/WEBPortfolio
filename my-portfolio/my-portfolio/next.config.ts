@@ -6,6 +6,12 @@ const nextConfig: NextConfig = {
     // Local images only - no remote domains
     remotePatterns: [],
   },
+  experimental: {
+    turbo: {
+      // Explicitly set root to prevent lockfile detection issues
+      root: __dirname,
+    },
+  },
 }
 
 export default nextConfig
