@@ -35,10 +35,10 @@ const projects = [
   },
   {
     id: '4',
-    title: 'Travel Booking Platform',
-    description: 'Streamlined booking experience for wanderers',
+    title: 'Vintage cycle shop',
+    description: 'Vintage Cycle Shop – Website Redesign & SEO Optimization. The client requested a full homepage redesign in vintage style, optimized for SEO and focused on increasing user trust and conversions. I delivered a complete website revamp — modernizing the layout while preserving the brand\'s aesthetic. The homepage was restructured with clear hierarchy, optimized metadata, and reinsurance elements. The result is a visually consistent, SEO-friendly, and conversion-focused site.',
     cover: '/placeholder-project.svg',
-    tags: ['Web', 'Travel'],
+    tags: ['UI/UX Prototyping', 'Figma'],
     featured: false,
     link: null,
   },

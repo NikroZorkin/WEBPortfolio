@@ -1,5 +1,17 @@
 import Image from 'next/image'
 import { BentoCard } from '@/components/bento-card'
+import {
+  SwatchIcon,
+  LightBulbIcon,
+  DevicePhoneMobileIcon,
+  HandRaisedIcon,
+  SparklesIcon,
+  UserGroupIcon,
+  BeakerIcon,
+  MapIcon,
+  BookOpenIcon,
+  UserCircleIcon,
+} from '@heroicons/react/24/outline'
 
 export function AboutSection() {
   return (
@@ -12,8 +24,8 @@ export function AboutSection() {
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-6">
           {/* Bio */}
           <BentoCard size="md" className="md:col-span-2">
-            <h3 className="text-xl font-semibold text-card-fg">
-              Hi, I'm Jane 👋
+            <h3 className="flex items-center gap-2 text-xl font-semibold text-card-fg">
+              Hi, I'm Jane <HandRaisedIcon className="h-6 w-6 text-primary" />
             </h3>
             <p className="mt-4 text-muted-fg">
               I'm a freelance UX/UI designer with 5+ years of experience
@@ -45,19 +57,7 @@ export function AboutSection() {
               />
               {/* Placeholder */}
               <div className="absolute inset-0 flex items-center justify-center bg-muted">
-                <svg
-                  className="h-16 w-16 text-muted-fg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={1.5}
-                    d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
+                <UserCircleIcon className="h-16 w-16 text-primary" />
               </div>
             </div>
           </BentoCard>
@@ -66,27 +66,54 @@ export function AboutSection() {
           <BentoCard size="sm">
             <h3 className="text-base font-semibold text-card-fg">Interests</h3>
             <ul className="mt-3 space-y-2 text-sm text-muted-fg">
-              <li>🎨 Visual Design</li>
-              <li>🧠 User Psychology</li>
-              <li>📱 Mobile-First Design</li>
+              <li className="flex items-center gap-2">
+                <SwatchIcon className="h-4 w-4 text-primary" />
+                Visual Design
+              </li>
+              <li className="flex items-center gap-2">
+                <LightBulbIcon className="h-4 w-4 text-primary" />
+                User Psychology
+              </li>
+              <li className="flex items-center gap-2">
+                <DevicePhoneMobileIcon className="h-4 w-4 text-primary" />
+                Mobile-First Design
+              </li>
             </ul>
           </BentoCard>
 
           <BentoCard size="sm">
             <h3 className="text-base font-semibold text-card-fg">Values</h3>
             <ul className="mt-3 space-y-2 text-sm text-muted-fg">
-              <li>♿ Accessibility</li>
-              <li>🌱 Sustainability</li>
-              <li>🤝 Collaboration</li>
+              <li className="flex items-center gap-2">
+                <HandRaisedIcon className="h-4 w-4 text-primary" />
+                Accessibility
+              </li>
+              <li className="flex items-center gap-2">
+                <SparklesIcon className="h-4 w-4 text-primary" />
+                Sustainability
+              </li>
+              <li className="flex items-center gap-2">
+                <UserGroupIcon className="h-4 w-4 text-primary" />
+                Collaboration
+              </li>
             </ul>
           </BentoCard>
 
           <BentoCard size="sm">
             <h3 className="text-base font-semibold text-card-fg">Hobbies</h3>
             <ul className="mt-3 space-y-2 text-sm text-muted-fg">
-              <li>☕ Coffee Tasting</li>
-              <li>🥾 Hiking</li>
-              <li>📚 Reading</li>
+              <li className="flex items-center gap-2">
+                <BeakerIcon className="h-4 w-4 text-primary" />
+                Coffee Tasting
+              </li>
+              <li className="flex items-center gap-2">
+                <MapIcon className="h-4 w-4 text-primary" />
+                Hiking
+              </li>
+              <li className="flex items-center gap-2">
+                <BookOpenIcon className="h-4 w-4 text-primary" />
+                Reading
+              </li>
             </ul>
           </BentoCard>
         </div>
