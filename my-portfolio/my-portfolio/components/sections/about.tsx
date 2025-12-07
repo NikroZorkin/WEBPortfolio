@@ -24,18 +24,16 @@ export function AboutSection() {
           {/* Bio */}
           <BentoCard size="md" className="md:col-span-2">
             <h3 className="flex items-center gap-2 text-xl font-semibold text-card-fg">
-              Hi, I'm Jane <HandRaisedIcon className="h-6 w-6 text-primary" />
+              Hi, I'm Danylo Zorkin <HandRaisedIcon className="h-6 w-6 text-primary" />
             </h3>
             <p className="mt-4 text-muted-fg">
-              I'm a freelance UX/UI designer with 5+ years of experience
-              creating beautiful, functional digital products. My passion lies
-              in understanding user needs and translating them into intuitive
-              designs that make a difference.
+              I'm a UX/UI designer focused on AI-driven products and clean, code-friendly interfaces. I'm comfortable moving between Figma, design systems, and front-end logic, creating experiences that look great and work well.
             </p>
             <p className="mt-4 text-muted-fg">
-              When I'm not designing, you'll find me exploring new coffee shops,
-              hiking mountain trails, or experimenting with the latest design
-              tools.
+              I'm really curious about how AI can speed up research, brainstorming, and creative exploration — from quick UX ideas to polished UI designs. I enjoy working where design meets engineering, speaking both "designer" and "developer" to make teamwork easier and smarter.
+            </p>
+            <p className="mt-4 text-muted-fg">
+              When I'm not designing, you'll usually find me testing new AI tools, improving my design process, learning more about coding, or diving into product and tech trends to stay ahead of the curve.
             </p>
           </BentoCard>
 
