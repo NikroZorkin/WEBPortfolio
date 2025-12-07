@@ -95,11 +95,11 @@ export function HeroSection() {
               className="relative overflow-hidden lg:col-start-5 lg:row-start-1 lg:min-h-[512px] lg:max-h-[512px]"
             >
               <div className="absolute inset-0 bg-gray-100">
-                <img
-                  src="/portrait.jpg"
-                  alt="Danylo Zorkin"
-                  className="h-full w-full object-cover object-center"
-                />
+<img
+                    src="/IMG000.jpg"
+                    alt="Danylo Zorkin"
+                    className="h-full w-full object-cover object-[60%_30%]"
+                  />
               </div>
             </BentoCard>
 
