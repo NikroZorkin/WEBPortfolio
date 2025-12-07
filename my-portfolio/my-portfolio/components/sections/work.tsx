@@ -42,15 +42,6 @@ const projects = [
     featured: false,
     link: null,
   },
-  {
-    id: '5',
-    title: 'Fitness Tracking App',
-    description: 'Personal trainer in your pocket',
-    cover: '/placeholder-project.svg',
-    tags: ['Mobile', 'Health'],
-    featured: false,
-    link: null,
-  },
 ]
 
 export function WorkSection() {
@@ -68,7 +59,7 @@ export function WorkSection() {
           </div>
 
           {/* Bento Grid for Projects with Stagger Animation (C4) */}
-          <StaggerList className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 md:gap-6">
+          <StaggerList className="grid grid-cols-1 gap-6 md:grid-cols-2">
             {projects.map((project) => {
               const cardContent = (
                 <div className="flex h-full w-full flex-col">
@@ -128,11 +119,9 @@ export function WorkSection() {
               return (
                 <BentoCard
                   key={project.id}
-                  colSpan={{ default: 1, md: 1, lg: 1 }}
-                  rowSpan={2}
                   interactive
                   noPadding
-                  className="group cursor-pointer overflow-hidden"
+                  className="group cursor-pointer overflow-hidden h-full"
                 >
                   {project.link ? (
                     <a 

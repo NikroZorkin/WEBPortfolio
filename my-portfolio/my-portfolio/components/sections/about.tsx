@@ -10,7 +10,6 @@ import {
   BeakerIcon,
   MapIcon,
   BookOpenIcon,
-  UserCircleIcon,
 } from '@heroicons/react/24/outline'
 
 export function AboutSection() {
@@ -45,20 +44,20 @@ export function AboutSection() {
             size="sm"
             noPadding
             aspectRatio="square"
-            className="relative"
+            className="relative overflow-hidden"
           >
             <div className="relative h-full w-full">
               <Image
-                src="/placeholder-about.svg"
-                alt="About Jane Doe"
+                src="/IMG000 (2).jpg"
+                alt="About me"
                 fill
                 sizes="(max-width: 768px) 100vw, 33vw"
                 className="object-cover"
+                style={{ 
+                  objectPosition: 'center 85%',
+                  transform: 'scale(1.2) translateX(-8%)'
+                }}
               />
-              {/* Placeholder */}
-              <div className="absolute inset-0 flex items-center justify-center bg-muted">
-                <UserCircleIcon className="h-16 w-16 text-primary" />
-              </div>
             </div>
           </BentoCard>
 
