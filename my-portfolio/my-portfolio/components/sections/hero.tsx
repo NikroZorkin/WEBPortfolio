@@ -103,6 +103,17 @@ export function HeroSection() {
               rowSpan={{ default: 2, lg: 2 }}
               className="flex flex-col justify-end lg:col-start-1 lg:row-start-1 lg:min-h-[336px] lg:max-h-[336px]"
             >
+              {/* Availability badge */}
+              <div className="mb-3 flex items-center gap-2">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500 opacity-75"></span>
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500"></span>
+                </span>
+                <span className="text-xs font-medium uppercase tracking-wider text-muted-fg">
+                  Available for freelance
+                </span>
+              </div>
+              
               <h1 className="text-4xl font-black uppercase tracking-tight leading-[0.95] text-fg sm:text-balance md:text-5xl lg:leading-[0.9] lg:text-[clamp(28px,5vw,72px)]">
                 DANYLO
                 <br />
