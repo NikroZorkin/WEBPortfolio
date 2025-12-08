@@ -41,8 +41,7 @@ export function AboutSection() {
           <BentoCard
             size="sm"
             noPadding
-            aspectRatio="square"
-            className="relative overflow-hidden"
+            className="relative overflow-hidden h-full min-h-[280px]"
           >
             <div className="relative h-full w-full">
               <Image
@@ -52,7 +51,7 @@ export function AboutSection() {
                 sizes="(max-width: 768px) 100vw, 33vw"
                 className="object-cover"
                 style={{ 
-                  objectPosition: 'center 85%',
+                  objectPosition: 'center 70%',
                   transform: 'scale(1.2) translateX(-8%)'
                 }}
               />
