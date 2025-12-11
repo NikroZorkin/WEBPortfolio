@@ -166,27 +166,6 @@ export function ContactSection() {
                   )}
                 </div>
 
-                {/* Budget Field (Optional) */}
-                <div>
-                  <label
-                    htmlFor="budget"
-                    className="block text-sm font-medium text-card-fg"
-                  >
-                    Budget (optional)
-                  </label>
-                  <select
-                    id="budget"
-                    {...register('budget')}
-                    className="mt-2 w-full rounded-lg border border-border bg-bg px-4 py-2 text-fg focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
-                  >
-                    <option value="">Select a range</option>
-                    <option value="< $5k">&lt; $5k</option>
-                    <option value="$5k - $10k">$5k - $10k</option>
-                    <option value="$10k - $20k">$10k - $20k</option>
-                    <option value="> $20k">&gt; $20k</option>
-                  </select>
-                </div>
-
                 {/* Message Field */}
                 <div>
                   <label
