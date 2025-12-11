@@ -18,8 +18,8 @@ export function PageFade({ children }: PageFadeProps) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{
-        duration: prefersReducedMotion ? 0.15 : 0.4,
-        ease: [0.22, 1, 0.36, 1],
+        duration: prefersReducedMotion ? 0.3 : 0.6,
+        ease: 'easeOut',
       }}
     >
       {children}

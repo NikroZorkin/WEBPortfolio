@@ -1,9 +1,11 @@
 'use client'
 
 import { useRef, useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
-import { SectionReveal } from '@/components/animations/section-reveal'
-import { cn } from '@/lib/utils'
+import { AnimatePresence, motion, useInView } from 'framer-motion'
+import { useReducedMotion } from '@/hooks/use-reduced-motion'
+
+// Apple-style smooth easing
+const smoothEase = [0.25, 0.4, 0.25, 1]
 
 const skills = [
   {
@@ -152,26 +154,75 @@ function SkillCard({
 }
 
 export function SkillsSection() {
-  return (
-    <SectionReveal>
-      <section id="skills" className="min-h-[60vh] px-4 py-24 md:px-8">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-12">
-            <h2 className="text-3xl font-bold text-fg md:text-5xl">Skills</h2>
-          </div>
+  const containerRef = useRef<HTMLDivElement>(null)
+  const isInView = useInView(containerRef, { once: true, amount: 0.1, margin: '0px 0px -80px 0px' })
+  const prefersReducedMotion = useReducedMotion()
 
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {skills.map((skill) => (
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: prefersReducedMotion ? 0 : 0.08,
+        delayChildren: 0.15,
+      },
+    },
+  }
+
+  const headerVariants = {
+    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: smoothEase,
+      },
+    },
+  }
+
+  const cardVariants = {
+    hidden: { 
+      opacity: 0, 
+      y: prefersReducedMotion ? 0 : 35,
+      scale: prefersReducedMotion ? 1 : 0.97,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.6,
+        ease: smoothEase,
+      },
+    },
+  }
+
+  return (
+    <section id="skills" className="min-h-[60vh] px-4 py-24 md:px-8">
+      <motion.div 
+        ref={containerRef}
+        className="mx-auto max-w-7xl"
+        variants={containerVariants}
+        initial="hidden"
+        animate={isInView ? 'visible' : 'hidden'}
+      >
+        <motion.div className="mb-12" variants={headerVariants}>
+          <h2 className="text-3xl font-bold text-fg md:text-5xl">Skills</h2>
+        </motion.div>
+
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {skills.map((skill) => (
+            <motion.div key={skill.title} variants={cardVariants}>
               <SkillCard
-                key={skill.title}
                 title={skill.title}
                 image={skill.image}
                 description={skill.description}
               />
-            ))}
-          </div>
+            </motion.div>
+          ))}
         </div>
-      </section>
-    </SectionReveal>
+      </motion.div>
+    </section>
   )
 }

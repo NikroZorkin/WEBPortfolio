@@ -1,16 +1,64 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { motion, useInView } from 'framer-motion'
 import { BentoCard } from '@/components/bento-card'
-import { SectionReveal } from '@/components/animations/section-reveal'
+import { useReducedMotion } from '@/hooks/use-reduced-motion'
 import { contactFormSchema, type ContactFormData } from '@/lib/validations/contact'
 import { trackEvent, AnalyticsEvents } from '@/lib/analytics'
+
+// Apple-style smooth easing
+const smoothEase = [0.25, 0.4, 0.25, 1]
 
 export function ContactSection() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
+  
+  const containerRef = useRef<HTMLDivElement>(null)
+  const isInView = useInView(containerRef, { once: true, amount: 0.1, margin: '0px 0px -80px 0px' })
+  const prefersReducedMotion = useReducedMotion()
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: prefersReducedMotion ? 0 : 0.12,
+        delayChildren: 0.1,
+      },
+    },
+  }
+
+  const headerVariants = {
+    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: smoothEase,
+      },
+    },
+  }
+
+  const cardVariants = {
+    hidden: { 
+      opacity: 0, 
+      y: prefersReducedMotion ? 0 : 35,
+      scale: prefersReducedMotion ? 1 : 0.97,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.6,
+        ease: smoothEase,
+      },
+    },
+  }
 
   const {
     register,
@@ -52,21 +100,27 @@ export function ContactSection() {
   }
 
   return (
-    <SectionReveal>
-      <section id="contact" className="min-h-screen px-4 py-24 md:px-8">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-12">
-            <h2 className="text-3xl font-bold text-fg md:text-5xl">
-              Get In Touch
-            </h2>
-            <p className="mt-4 text-lg text-muted-fg">
-              Have a project in mind? Let's work together.
-            </p>
-          </div>
+    <section id="contact" className="min-h-screen px-4 py-24 md:px-8">
+      <motion.div 
+        ref={containerRef}
+        className="mx-auto max-w-7xl"
+        variants={containerVariants}
+        initial="hidden"
+        animate={isInView ? 'visible' : 'hidden'}
+      >
+        <motion.div className="mb-12" variants={headerVariants}>
+          <h2 className="text-3xl font-bold text-fg md:text-5xl">
+            Get In Touch
+          </h2>
+          <p className="mt-4 text-lg text-muted-fg">
+            Have a project in mind? Let's work together.
+          </p>
+        </motion.div>
 
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            {/* Contact Form */}
-            <BentoCard size="md">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+          {/* Contact Form */}
+          <motion.div variants={cardVariants}>
+            <BentoCard size="md" className="h-full">
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                 {/* Name Field */}
                 <div>
@@ -187,9 +241,11 @@ export function ContactSection() {
                 </button>
               </form>
             </BentoCard>
+          </motion.div>
 
-            {/* Contact Info */}
-            <div className="flex flex-col gap-6">
+          {/* Contact Info */}
+          <div className="flex flex-col gap-6">
+            <motion.div variants={cardVariants}>
               <BentoCard className="flex flex-col">
                 <h3 className="text-lg font-semibold text-card-fg">Email</h3>
                 <a
@@ -199,7 +255,9 @@ export function ContactSection() {
                   danilzorkin1402@gmail.com
                 </a>
               </BentoCard>
+            </motion.div>
 
+            <motion.div variants={cardVariants}>
               <BentoCard className="flex flex-col">
                 <h3 className="text-lg font-semibold text-card-fg">Telegram</h3>
                 <a
@@ -211,7 +269,9 @@ export function ContactSection() {
                   @danylo_zorkin
                 </a>
               </BentoCard>
+            </motion.div>
 
+            <motion.div variants={cardVariants}>
               <BentoCard className="flex flex-col">
                 <h3 className="text-lg font-semibold text-card-fg">
                   Response Time
@@ -220,11 +280,10 @@ export function ContactSection() {
                   Usually within 24 hours
                 </p>
               </BentoCard>
-            </div>
+            </motion.div>
           </div>
         </div>
-      </section>
-    </SectionReveal>
+      </motion.div>
+    </section>
   )
 }
-

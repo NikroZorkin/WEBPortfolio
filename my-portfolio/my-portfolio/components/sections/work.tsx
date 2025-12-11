@@ -1,7 +1,10 @@
+'use client'
+
+import { useRef } from 'react'
 import Image from 'next/image'
+import { motion, useInView } from 'framer-motion'
 import { BentoCard } from '@/components/bento-card'
-import { StaggerList } from '@/components/animations/stagger-list'
-import { SectionReveal } from '@/components/animations/section-reveal'
+import { useReducedMotion } from '@/hooks/use-reduced-motion'
 
 // Placeholder project data - will be replaced with Contentlayer in CL epic
 const projects = [
@@ -44,81 +47,133 @@ const projects = [
   },
 ]
 
+// Apple-style smooth easing
+const smoothEase = [0.25, 0.4, 0.25, 1]
+
 export function WorkSection() {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const isInView = useInView(containerRef, { once: true, amount: 0.1, margin: '0px 0px -80px 0px' })
+  const prefersReducedMotion = useReducedMotion()
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: prefersReducedMotion ? 0 : 0.1,
+        delayChildren: 0.15,
+      },
+    },
+  }
+
+  const headerVariants = {
+    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: smoothEase,
+      },
+    },
+  }
+
+  const cardVariants = {
+    hidden: { 
+      opacity: 0, 
+      y: prefersReducedMotion ? 0 : 40,
+      scale: prefersReducedMotion ? 1 : 0.96,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.65,
+        ease: smoothEase,
+      },
+    },
+  }
+
   return (
-    <SectionReveal>
-      <section id="work" className="min-h-screen px-4 pt-20 pb-24 md:px-8">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-12">
-            <h2 className="text-3xl font-bold text-fg md:text-5xl">
-              Selected Work
-            </h2>
-            <p className="mt-4 text-lg text-muted-fg">
-              A collection of projects showcasing design and problem-solving
-            </p>
-          </div>
+    <section id="work" className="min-h-screen px-4 pt-20 pb-24 md:px-8">
+      <motion.div 
+        ref={containerRef}
+        className="mx-auto max-w-7xl"
+        variants={containerVariants}
+        initial="hidden"
+        animate={isInView ? 'visible' : 'hidden'}
+      >
+        <motion.div className="mb-12" variants={headerVariants}>
+          <h2 className="text-3xl font-bold text-fg md:text-5xl">
+            Selected Work
+          </h2>
+          <p className="mt-4 text-lg text-muted-fg">
+            A collection of projects showcasing design and problem-solving
+          </p>
+        </motion.div>
 
-          {/* Bento Grid for Projects with Stagger Animation (C4) */}
-          <StaggerList className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            {projects.map((project) => {
-              const cardContent = (
-                <div className="flex h-full w-full flex-col">
-                  {/* Project Cover */}
-                  <div className="relative aspect-[16/10] w-full overflow-hidden bg-muted">
-                    {project.cover.includes('placeholder') ? (
-                      /* Placeholder Pattern */
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <svg
-                          className="h-16 w-16 text-muted-fg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={1.5}
-                            d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                          />
-                        </svg>
-                      </div>
-                    ) : (
-                      <Image
-                        src={project.cover}
-                        alt={project.title}
-                        fill
-                        sizes="(max-width: 768px) 100vw, 33vw"
-                        className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
-                        style={{ objectPosition: project.imagePosition || 'center' }}
-                      />
-                    )}
-                  </div>
-
-                  {/* Project Info */}
-                  <div className="flex flex-1 flex-col justify-center p-6">
-                    <h3 className="text-lg font-semibold text-card-fg">
-                      {project.title}
-                    </h3>
-                    <p className="mt-2 text-sm text-muted-fg line-clamp-2">
-                      {project.description}
-                    </p>
-                    <div className="mt-3 flex flex-wrap gap-2">
-                      {project.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="rounded-md bg-muted px-2 py-1 text-xs text-muted-fg"
-                        >
-                          {tag}
-                        </span>
-                      ))}
+        {/* Bento Grid for Projects */}
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+          {projects.map((project) => {
+            const cardContent = (
+              <div className="flex h-full w-full flex-col">
+                {/* Project Cover */}
+                <div className="relative aspect-[16/10] w-full overflow-hidden bg-muted">
+                  {project.cover.includes('placeholder') ? (
+                    /* Placeholder Pattern */
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <svg
+                        className="h-16 w-16 text-muted-fg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={1.5}
+                          d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                        />
+                      </svg>
                     </div>
+                  ) : (
+                    <Image
+                      src={project.cover}
+                      alt={project.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+                      style={{ objectPosition: project.imagePosition || 'center' }}
+                    />
+                  )}
+                </div>
+
+                {/* Project Info */}
+                <div className="flex flex-1 flex-col justify-center p-6">
+                  <h3 className="text-lg font-semibold text-card-fg">
+                    {project.title}
+                  </h3>
+                  <p className="mt-2 text-sm text-muted-fg line-clamp-2">
+                    {project.description}
+                  </p>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {project.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="rounded-md bg-muted px-2 py-1 text-xs text-muted-fg"
+                      >
+                        {tag}
+                      </span>
+                    ))}
                   </div>
                 </div>
-              )
+              </div>
+            )
 
-              return (
+            return (
+              <motion.div key={project.id} variants={cardVariants}>
                 <BentoCard
-                  key={project.id}
                   interactive
                   noPadding
                   className="group cursor-pointer overflow-hidden h-full"
@@ -136,12 +191,11 @@ export function WorkSection() {
                     cardContent
                   )}
                 </BentoCard>
-              )
-            })}
-          </StaggerList>
+              </motion.div>
+            )
+          })}
         </div>
-      </section>
-    </SectionReveal>
+      </motion.div>
+    </section>
   )
 }
-
