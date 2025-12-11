@@ -1,39 +1,26 @@
 import Replicate from 'replicate'
-import { writeFile, mkdir, readFile } from 'fs/promises'
+import { writeFile, mkdir } from 'fs/promises'
 import path from 'path'
 
 // ===== НАСТРОЙКИ =====
 const OUTPUT_DIR = 'C:\\Cursor Generate IMG'
+// Токен читается из переменной окружения REPLICATE_API_TOKEN
 // =====================
 
-// Читаем токен из .env.local (не коммитится в git)
-async function getApiToken(): Promise<string> {
-  try {
-    const envPath = path.join(__dirname, '..', '.env.local')
-    const content = await readFile(envPath, 'utf-8')
-    const match = content.match(/REPLICATE_API_TOKEN=(.+)/)
-    if (match) return match[1].trim()
-  } catch {}
-  // Fallback на переменную окружения
-  if (process.env.REPLICATE_API_TOKEN) return process.env.REPLICATE_API_TOKEN
-  throw new Error('REPLICATE_API_TOKEN не найден. Добавь в .env.local')
-}
-
-let replicate: Replicate
+// Токен передаётся через env (установи в системе или .env.local)
+const replicate = new Replicate({
+  auth: process.env.REPLICATE_API_TOKEN || '',
+})
 
 async function generateImage(prompt: string, filename: string) {
   console.log(`\n🎨 Генерация: "${prompt}"`)
   console.log(`📁 Сохранение: ${OUTPUT_DIR}\\${filename}`)
 
   try {
-    // Инициализируем Replicate с токеном
-    const token = await getApiToken()
-    replicate = new Replicate({ auth: token })
-
     // Создаём папку если нет
     await mkdir(OUTPUT_DIR, { recursive: true })
 
-    const output = await replicate.run('black-forest-labs/flux-1.1-pro', {
+    const output = await replicate.run('black-forest-labs/flux-2-pro', {
       input: {
         prompt,
         aspect_ratio: '16:9',
@@ -44,7 +31,8 @@ async function generateImage(prompt: string, filename: string) {
       },
     })
 
-    const imageUrl = output as string
+    // Flux 2.0 Pro возвращает FileOutput с методом url()
+    const imageUrl = typeof output === 'string' ? output : (output as any).url()
     console.log(`🔗 URL: ${imageUrl}`)
 
     // Скачиваем и сохраняем
