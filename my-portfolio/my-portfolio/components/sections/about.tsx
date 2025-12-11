@@ -5,19 +5,106 @@ import Image from 'next/image'
 import { motion, useInView } from 'framer-motion'
 import { BentoCard } from '@/components/bento-card'
 import { useReducedMotion } from '@/hooks/use-reduced-motion'
-import {
-  SwatchIcon,
-  LightBulbIcon,
-  HandRaisedIcon,
-  SparklesIcon,
-  UserGroupIcon,
-  BeakerIcon,
-  MapIcon,
-  BookOpenIcon,
-} from '@heroicons/react/24/outline'
+import { HandRaisedIcon } from '@heroicons/react/24/outline'
 
 // Apple-style smooth easing
 const smoothEase = [0.25, 0.4, 0.25, 1]
+
+// Custom SVG Icons from devicon style
+const FigmaIcon = () => (
+  <svg viewBox="0 0 128 128" className="h-5 w-5">
+    <path fill="#0acf83" d="M45.5 129c11.9 0 21.5-9.6 21.5-21.5V86H45.5C33.6 86 24 95.6 24 107.5S33.6 129 45.5 129z"/>
+    <path fill="#a259ff" d="M24 64.5C24 52.6 33.6 43 45.5 43H67v43H45.5C33.6 86 24 76.4 24 64.5z"/>
+    <path fill="#f24e1e" d="M24 21.5C24 9.6 33.6 0 45.5 0H67v43H45.5C33.6 43 24 33.4 24 21.5z"/>
+    <path fill="#ff7262" d="M67 0h21.5C100.4 0 110 9.6 110 21.5S100.4 43 88.5 43H67V0z"/>
+    <path fill="#1abcfe" d="M110 64.5c0 11.9-9.6 21.5-21.5 21.5S67 76.4 67 64.5 76.6 43 88.5 43 110 52.6 110 64.5z"/>
+  </svg>
+)
+
+const AISparkIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5">
+    <path d="M12 2L13.09 8.26L19 7L14.74 11.09L21 12L14.74 12.91L19 17L13.09 15.74L12 22L10.91 15.74L5 17L9.26 12.91L3 12L9.26 11.09L5 7L10.91 8.26L12 2Z" 
+      fill="currentColor" className="text-violet-500"/>
+  </svg>
+)
+
+const CodeIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5">
+    <path d="M8 18L2 12L8 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-cyan-500"/>
+    <path d="M16 6L22 12L16 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-cyan-500"/>
+  </svg>
+)
+
+const ToolsIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5">
+    <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" 
+      stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-amber-500"/>
+  </svg>
+)
+
+const AccessibilityIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5">
+    <circle cx="12" cy="4" r="2" fill="currentColor" className="text-emerald-500"/>
+    <path d="M12 8V13M8 10H16M10 13L8 21M14 13L16 21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-emerald-500"/>
+  </svg>
+)
+
+const LeafIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5">
+    <path d="M6.5 12.5L17.5 2.5C17.5 2.5 21.5 6.5 21.5 12.5C21.5 18.5 15.5 21.5 12 21.5C8.5 21.5 2.5 18.5 2.5 12.5C2.5 6.5 6.5 2.5 6.5 2.5" 
+      stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-green-500"/>
+    <path d="M12 8V16M8 12H16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="text-green-500"/>
+  </svg>
+)
+
+const TeamIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5">
+    <circle cx="9" cy="7" r="3" stroke="currentColor" strokeWidth="2" className="text-blue-500"/>
+    <circle cx="17" cy="7" r="3" stroke="currentColor" strokeWidth="2" className="text-blue-500"/>
+    <path d="M3 21V19C3 16.79 4.79 15 7 15H11C13.21 15 15 16.79 15 19V21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="text-blue-500"/>
+    <path d="M17 15C19.21 15 21 16.79 21 19V21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="text-blue-500"/>
+  </svg>
+)
+
+const CoffeeIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5">
+    <path d="M18 8H19C20.0609 8 21.0783 8.42143 21.8284 9.17157C22.5786 9.92172 23 10.9391 23 12C23 13.0609 22.5786 14.0783 21.8284 14.8284C21.0783 15.5786 20.0609 16 19 16H18" 
+      stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-amber-600"/>
+    <path d="M2 8H18V17C18 18.0609 17.5786 19.0783 16.8284 19.8284C16.0783 20.5786 15.0609 21 14 21H6C4.93913 21 3.92172 20.5786 3.17157 19.8284C2.42143 19.0783 2 18.0609 2 17V8Z" 
+      stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-amber-600"/>
+    <path d="M6 1V4M10 1V4M14 1V4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="text-amber-600"/>
+  </svg>
+)
+
+const MountainIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5">
+    <path d="M8 21L12 10L16 21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-teal-500"/>
+    <path d="M2 21L7 11L10 16L12 10L15 16L17 11L22 21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-teal-500"/>
+  </svg>
+)
+
+const BookIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5">
+    <path d="M4 19.5C4 18.837 4.26339 18.2011 4.73223 17.7322C5.20107 17.2634 5.83696 17 6.5 17H20" 
+      stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-indigo-500"/>
+    <path d="M6.5 2H20V22H6.5C5.83696 22 5.20107 21.7366 4.73223 21.2678C4.26339 20.7989 4 20.163 4 19.5V4.5C4 3.83696 4.26339 3.20107 4.73223 2.73223C5.20107 2.26339 5.83696 2 6.5 2Z" 
+      stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-indigo-500"/>
+  </svg>
+)
+
+// Interactive list item component
+function ListItem({ icon, children }: { icon: React.ReactNode; children: React.ReactNode }) {
+  return (
+    <li className="group/item flex items-center gap-3 py-2 px-3 -mx-3 rounded-lg transition-all duration-200 hover:bg-white/5 cursor-default">
+      <span className="flex-shrink-0 transition-transform duration-200 group-hover/item:scale-110">
+        {icon}
+      </span>
+      <span className="text-sm text-muted-fg transition-colors duration-200 group-hover/item:text-fg">
+        {children}
+      </span>
+    </li>
+  )
+}
 
 export function AboutSection() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -84,13 +171,13 @@ export function AboutSection() {
               <h3 className="flex items-center gap-2 text-xl font-semibold text-card-fg">
                 Hi, I'm Danylo Zorkin <HandRaisedIcon className="h-6 w-6 text-primary" />
               </h3>
-              <p className="mt-4 text-muted-fg">
+              <p className="mt-4 text-muted-fg leading-relaxed">
                 I'm a UX/UI designer focused on AI-driven products and clean, code-friendly interfaces. I'm comfortable moving between Figma, design systems, and front-end logic, creating experiences that look great and work well.
               </p>
-              <p className="mt-4 text-muted-fg">
+              <p className="mt-4 text-muted-fg leading-relaxed">
                 I'm really curious about how AI can speed up research, brainstorming, and creative exploration — from quick UX ideas to polished UI designs. I enjoy working where design meets engineering, speaking both "designer" and "developer" to make teamwork easier and smarter.
               </p>
-              <p className="mt-4 text-muted-fg">
+              <p className="mt-4 text-muted-fg leading-relaxed">
                 When I'm not designing, you'll usually find me testing new AI tools, improving my design process, learning more about coding, or diving into product and tech trends to stay ahead of the curve.
               </p>
             </BentoCard>
@@ -122,60 +209,53 @@ export function AboutSection() {
           {/* Interests */}
           <motion.div variants={cardVariants}>
             <BentoCard size="sm" className="h-full">
-              <h3 className="text-base font-semibold text-card-fg">Interests</h3>
-              <ul className="mt-3 space-y-2 text-sm text-muted-fg">
-                <li className="flex items-center gap-2">
-                  <SparklesIcon className="h-4 w-4 text-primary" />
+              <h3 className="text-lg font-semibold text-card-fg mb-2">Interests</h3>
+              <ul className="space-y-0.5">
+                <ListItem icon={<AISparkIcon />}>
                   AI-assisted design workflows
-                </li>
-                <li className="flex items-center gap-2">
-                  <SwatchIcon className="h-4 w-4 text-primary" />
+                </ListItem>
+                <ListItem icon={<FigmaIcon />}>
                   UX/UI for digital products
-                </li>
-                <li className="flex items-center gap-2">
-                  <LightBulbIcon className="h-4 w-4 text-primary" />
+                </ListItem>
+                <ListItem icon={<ToolsIcon />}>
                   Exploring new AI & design tools
-                </li>
+                </ListItem>
               </ul>
             </BentoCard>
           </motion.div>
 
+          {/* Values */}
           <motion.div variants={cardVariants}>
             <BentoCard size="sm" className="h-full">
-              <h3 className="text-base font-semibold text-card-fg">Values</h3>
-              <ul className="mt-3 space-y-2 text-sm text-muted-fg">
-                <li className="flex items-center gap-2">
-                  <HandRaisedIcon className="h-4 w-4 text-primary" />
-                  Accessibility
-                </li>
-                <li className="flex items-center gap-2">
-                  <SparklesIcon className="h-4 w-4 text-primary" />
-                  Sustainability
-                </li>
-                <li className="flex items-center gap-2">
-                  <UserGroupIcon className="h-4 w-4 text-primary" />
-                  Collaboration
-                </li>
+              <h3 className="text-lg font-semibold text-card-fg mb-2">Values</h3>
+              <ul className="space-y-0.5">
+                <ListItem icon={<AccessibilityIcon />}>
+                  Clarity & functional minimalism
+                </ListItem>
+                <ListItem icon={<LeafIcon />}>
+                  Consistency & system-driven design
+                </ListItem>
+                <ListItem icon={<TeamIcon />}>
+                  Continuous learning & collaboration
+                </ListItem>
               </ul>
             </BentoCard>
           </motion.div>
 
+          {/* Hobbies */}
           <motion.div variants={cardVariants}>
             <BentoCard size="sm" className="h-full">
-              <h3 className="text-base font-semibold text-card-fg">Hobbies</h3>
-              <ul className="mt-3 space-y-2 text-sm text-muted-fg">
-                <li className="flex items-center gap-2">
-                  <BeakerIcon className="h-4 w-4 text-primary" />
+              <h3 className="text-lg font-semibold text-card-fg mb-2">Hobbies</h3>
+              <ul className="space-y-0.5">
+                <ListItem icon={<CoffeeIcon />}>
                   Coffee Tasting
-                </li>
-                <li className="flex items-center gap-2">
-                  <MapIcon className="h-4 w-4 text-primary" />
+                </ListItem>
+                <ListItem icon={<MountainIcon />}>
                   Hiking
-                </li>
-                <li className="flex items-center gap-2">
-                  <BookOpenIcon className="h-4 w-4 text-primary" />
+                </ListItem>
+                <ListItem icon={<BookIcon />}>
                   Reading
-                </li>
+                </ListItem>
               </ul>
             </BentoCard>
           </motion.div>
