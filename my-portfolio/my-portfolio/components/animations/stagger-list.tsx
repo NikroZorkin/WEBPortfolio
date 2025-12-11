@@ -6,37 +6,48 @@ import { useReducedMotion } from '@/hooks/use-reduced-motion'
 
 // ANIMATION RULE: Only transform/opacity - NO layout properties (width/height/top/left)
 
+// Modern smooth easing - feels natural and polished
+const smoothEase = [0.22, 1, 0.36, 1]
+
 interface StaggerListProps {
   children: ReactNode
   className?: string
+  staggerDelay?: number
 }
 
-export function StaggerList({ children, className }: StaggerListProps) {
+export function StaggerList({ children, className, staggerDelay = 0.08 }: StaggerListProps) {
   const ref = useRef<HTMLDivElement>(null)
   const prefersReducedMotion = useReducedMotion()
   const isInView = useInView(ref, {
     once: true,
-    amount: 0.15,
+    amount: 0.05, // Trigger earlier
+    margin: '0px 0px -80px 0px',
   })
 
   const container = {
-    hidden: { opacity: 0 },
+    hidden: { opacity: 1 },
     show: {
       opacity: 1,
       transition: {
-        staggerChildren: prefersReducedMotion ? 0 : 0.1,
+        staggerChildren: prefersReducedMotion ? 0 : staggerDelay,
+        delayChildren: 0.1,
       },
     },
   }
 
   const item = {
-    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 10 },
+    hidden: { 
+      opacity: 0, 
+      y: prefersReducedMotion ? 0 : 16,
+      scale: prefersReducedMotion ? 1 : 0.98,
+    },
     show: {
       opacity: 1,
       y: 0,
+      scale: 1,
       transition: {
-        duration: 0.4,
-        ease: 'easeOut',
+        duration: 0.5,
+        ease: smoothEase,
       },
     },
   }
